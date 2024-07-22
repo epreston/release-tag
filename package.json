@@ -1,0 +1,32 @@
+{
+  "private": true,
+  "type": "module",
+  "name": "@epreston/release-tag",
+  "version": "1.0.0",
+  "description": "Create a release for a tag in the repository",
+  "author": "Ed Preston",
+  "license": "MIT",
+  "repository": "@epreston/release-tag",
+  "keywords": [
+    "GitHub",
+    "Actions",
+    "JavaScript"
+  ],
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --platform=node --target=node20 --outfile=dist/index.js",
+    "build:min": "esbuild src/index.js --bundle --minify --platform=node --target=node20 --outfile=dist/index.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.23.0"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0"
+  },
+  "engines": {
+    "node": "^20.0.0 || >=22.0.0"
+  }
+}
