@@ -30,7 +30,7 @@ jobs:
 
       - name: Release
         id: release_tag
-        uses: epreston/release-tag@v1
+        uses: epreston/release-tag@v1.0.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
