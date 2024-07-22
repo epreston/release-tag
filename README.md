@@ -8,9 +8,9 @@ Yet another modernisation of the [actions/create-release](https://github.com/act
 
 Create a workflow `.yml` file in your `.github/workflows` directory referencing this action.
 
-- [Example](docs/example.md).
-- [Inputs](docs/inputs.md).
-- [Outputs](docs/outputs.md).
+- [Example](docs/example.md)
+- [Inputs](docs/inputs.md)
+- [Outputs](docs/outputs.md)
 
 ## Libraries
 
