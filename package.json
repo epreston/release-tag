@@ -1,6 +1,5 @@
 {
   "private": true,
-  "type": "module",
   "name": "@epreston/release-tag",
   "version": "1.0.0",
   "description": "Create a release for a tag in the repository",

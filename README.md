@@ -1,6 +1,6 @@
 # release-tag
 
-Modernisation of the [actions/create-release](https://github.com/actions/create-release) github action.
+Yet another modernisation of the [actions/create-release](https://github.com/actions/create-release) github action.
 
 [![CI][ci-badge]][ci-url]
 

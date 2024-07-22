@@ -18833,7 +18833,7 @@ var require_core = __commonJS({
       process.env["PATH"] = `${inputPath}${path.delimiter}${process.env["PATH"]}`;
     }
     exports2.addPath = addPath;
-    function getInput2(name, options) {
+    function getInput(name, options) {
       const val = process.env[`INPUT_${name.replace(/ /g, "_").toUpperCase()}`] || "";
       if (options && options.required && !val) {
         throw new Error(`Input required and not supplied: ${name}`);
@@ -18843,9 +18843,9 @@ var require_core = __commonJS({
       }
       return val.trim();
     }
-    exports2.getInput = getInput2;
+    exports2.getInput = getInput;
     function getMultilineInput(name, options) {
-      const inputs = getInput2(name, options).split("\n").filter((x) => x !== "");
+      const inputs = getInput(name, options).split("\n").filter((x) => x !== "");
       if (options && options.trimWhitespace === false) {
         return inputs;
       }
@@ -18855,7 +18855,7 @@ var require_core = __commonJS({
     function getBooleanInput(name, options) {
       const trueValue = ["true", "True", "TRUE"];
       const falseValue = ["false", "False", "FALSE"];
-      const val = getInput2(name, options);
+      const val = getInput(name, options);
       if (trueValue.includes(val))
         return true;
       if (falseValue.includes(val))
@@ -18864,7 +18864,7 @@ var require_core = __commonJS({
 Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
     }
     exports2.getBooleanInput = getBooleanInput;
-    function setOutput2(name, value) {
+    function setOutput(name, value) {
       const filePath = process.env["GITHUB_OUTPUT"] || "";
       if (filePath) {
         return file_command_1.issueFileCommand("OUTPUT", file_command_1.prepareKeyValueMessage(name, value));
@@ -18872,16 +18872,16 @@ Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
       process.stdout.write(os.EOL);
       command_1.issueCommand("set-output", { name }, utils_1.toCommandValue(value));
     }
-    exports2.setOutput = setOutput2;
+    exports2.setOutput = setOutput;
     function setCommandEcho(enabled) {
       command_1.issue("echo", enabled ? "on" : "off");
     }
     exports2.setCommandEcho = setCommandEcho;
-    function setFailed2(message) {
+    function setFailed(message) {
       process.exitCode = ExitCode.Failure;
       error(message);
     }
-    exports2.setFailed = setFailed2;
+    exports2.setFailed = setFailed;
     function isDebug() {
       return process.env["RUNNER_DEBUG"] === "1";
     }
@@ -23020,41 +23020,41 @@ var require_github = __commonJS({
     var Context = __importStar(require_context());
     var utils_1 = require_utils4();
     exports2.context = new Context.Context();
-    function getOctokit(token, options, ...additionalPlugins) {
+    function getOctokit2(token, options, ...additionalPlugins) {
       const GitHubWithPlugins = utils_1.GitHub.plugin(...additionalPlugins);
       return new GitHubWithPlugins((0, utils_1.getOctokitOptions)(token, options));
     }
-    exports2.getOctokit = getOctokit;
+    exports2.getOctokit = getOctokit2;
   }
 });
 
 // src/index.js
-var core = __toESM(require_core(), 1);
-var import_github = __toESM(require_github(), 1);
-var import_node_fs = require("node:fs");
+var core = require_core();
+var { getOctokit, context } = require_github();
+var fs = require("node:fs");
 async function run() {
   try {
-    const github = new import_github.GitHub(process.env.GITHUB_TOKEN);
-    const { owner: currentOwner, repo: currentRepo } = import_github.context.repo;
+    const octokit = getOctokit(process.env.GITHUB_TOKEN);
+    const { owner: currentOwner, repo: currentRepo } = context.repo;
     const tagName = core.getInput("tag_name", { required: true });
     const tag = tagName.replace("refs/tags/", "");
     const releaseName = core.getInput("release_name", { required: false }).replace("refs/tags/", "");
     const body = core.getInput("body", { required: false });
     const draft = core.getInput("draft", { required: false }) === "true";
     const prerelease = core.getInput("prerelease", { required: false }) === "true";
-    const commitish = core.getInput("commitish", { required: false }) || import_github.context.sha;
+    const commitish = core.getInput("commitish", { required: false }) || context.sha;
     const bodyPath = core.getInput("body_path", { required: false });
     const owner = core.getInput("owner", { required: false }) || currentOwner;
     const repo = core.getInput("repo", { required: false }) || currentRepo;
     let bodyFileContent = null;
     if (bodyPath !== "" && !!bodyPath) {
       try {
-        bodyFileContent = import_node_fs.fs.readFileSync(bodyPath, { encoding: "utf8" });
+        bodyFileContent = fs.readFileSync(bodyPath, { encoding: "utf8" });
       } catch (error) {
         core.setFailed(error.message);
       }
     }
-    const createReleaseResponse = await github.repos.createRelease({
+    const createReleaseResponse = await octokit.rest.repos.createRelease({
       owner,
       repo,
       tag_name: tag,

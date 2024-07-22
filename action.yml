@@ -1,4 +1,4 @@
-name: 'Create a Release'
+name: 'Create a Release on Tag'
 description: 'Create a release for a tag in the repository'
 
 inputs:
