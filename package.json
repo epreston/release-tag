@@ -5,7 +5,7 @@
   "description": "Create a release for a tag in the repository",
   "author": "Ed Preston",
   "license": "MIT",
-  "repository": "@epreston/release-tag",
+  "repository": "github:@epreston/release-tag",
   "keywords": [
     "GitHub",
     "Actions",
@@ -13,6 +13,10 @@
   ],
   "exports": {
     ".": "./dist/index.js"
+  },
+  "packageManager": "npm@10.7.0",
+  "engines": {
+    "node": "^20.0.0 || >=22.0.0"
   },
   "scripts": {
     "build": "esbuild src/index.js --bundle --platform=node --target=node20 --outfile=dist/index.js",
@@ -24,8 +28,5 @@
   "dependencies": {
     "@actions/core": "^1.10.1",
     "@actions/github": "^6.0.0"
-  },
-  "engines": {
-    "node": "^20.0.0 || >=22.0.0"
   }
 }
