@@ -27,6 +27,6 @@
   },
   "dependencies": {
     "@actions/core": "^2.0.2",
-    "@actions/github": "^7.0.0"
+    "@actions/github": "^8.0.0"
   }
 }
