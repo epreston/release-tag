@@ -26,7 +26,7 @@
     "build:min": "esbuild src/index.js --bundle --minify --platform=node --target=node20 --outfile=dist/index.js"
   },
   "devDependencies": {
-    "esbuild": "^0.28.0",
+    "esbuild": "^0.28.1",
     "@actions/core": "^3.0.1",
     "@actions/github": "^9.1.1"
   }
