@@ -16,15 +16,14 @@ updates:
       interval: monthly
 
     groups:
-      # Less likely to change published bundle.
-      npm-development:
+      npm-dev:
         dependency-type: development
         update-types:
           - minor
           - patch
 
       # Need to be updated and bundled manually.
-      # npm-production:
+      # npm-prod:
       #   dependency-type: production
       #   update-types:
       #     - patch
