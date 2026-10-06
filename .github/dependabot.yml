@@ -13,7 +13,8 @@ updates:
   - package-ecosystem: npm
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly
+
     groups:
       # Less likely to change published bundle.
       npm-development:
