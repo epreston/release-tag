@@ -26,4 +26,5 @@ updates:
       # npm-prod:
       #   dependency-type: production
       #   update-types:
+      #     - minor
       #     - patch
