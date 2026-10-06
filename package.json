@@ -17,9 +17,9 @@
   "exports": {
     ".": "./dist/index.js"
   },
-  "packageManager": "npm@11.11.0",
+  "packageManager": "npm@12.2.0",
   "engines": {
-    "node": "^20.0.0 || >=22.0.0"
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
   },
   "scripts": {
     "build": "esbuild src/index.js --bundle --platform=node --target=node20 --outfile=dist/index.js",
