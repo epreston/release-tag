@@ -1,11 +1,14 @@
-# Auto detect text files and perform LF normalization
+# auto detect text files and perform LF normalization
 * text=auto eol=lf
 
-# Files to remove from language stats for this project
-# *.md linguist-vendored
-dist/** -diff linguist-generated=true
-
-CHANGELOG.md export-ignore
+# exceptions using CRLF normalization
 LICENSE eol=crlf
 .github/SECURITY.md eol=crlf
 .github/CODE_OF_CONDUCT.md eol=crlf
+
+# exclude from generated archives
+CHANGELOG.md export-ignore
+
+# file types to exclude from language stats
+# *.md linguist-vendored
+dist/** -diff linguist-generated=true
